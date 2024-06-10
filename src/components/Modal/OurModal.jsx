@@ -10,28 +10,34 @@ import LOGO_1 from "../../assets/logo1.svg";
 import LOGO_2 from "../../assets/logo2.svg";
 import Rupee from "../../assets/rupee.svg";
 import LIBRARY_LOGO from "../../assets/librarylogo.svg";
+import NewLogo1 from "../../assets/NewLogo1.svg";
+import Cycletrack1 from "../../assets/Cycletrack1.svg";
+import HeatedPool from "../../assets/HeatedPool.svg";
+import TreeMuseum from "../../assets/TreeMuseum.svg";
 
 import Map from "../../assets/map.png";
 
+
+const imgItems = [
+  { text: "Children's Library", image: LIBRARY_LOGO },
+  { text: "Ampitheare", image: NewLogo1 },
+  { text: "Basket ball,volley ball", image: TreeMuseum },
+  { text: "Heated pool", image: HeatedPool },
+  { text: "Tree Museum", image: LIBRARY_LOGO },
+  { text: "Cycling track", image: Cycletrack1 },
+  { text: "Jogging track", image: LIBRARY_LOGO },
+  { text: "Pet park", image: LIBRARY_LOGO },
+];
+
 const OurModal = ({ handleModal }) => {
-  const [showModal, setShowModal] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+ const [show, setShow] = useState(false);
 
   const handleImageClick = (index) => {
     setActiveIndex(index);
   };
 
-  const data = [
-    "Children's Library",
-    "Ampitheare",
-    "Basket ball,volley ball,",
-    "Heated pool",
-    "Tree Museum",
-    "Cycling track",
-    "Jogging track",
-    "Pet park,",
-  ];
-
+  const itemsToShow= show ? imgItems : imgItems.slice(0, 2);
   return (
     <div className="modal-overlay" onClick={handleModal}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -106,15 +112,15 @@ const OurModal = ({ handleModal }) => {
                   <hr className="separator" />
                   <div className="lower-div">
                     <div className="box">
-                      <h4>Total Units</h4>
+                      <h3>Total Units</h3>
                       <p>968</p>
                     </div>
                     <div className="box">
-                      <h4>Project Type</h4>
+                      <h3>Project Type</h3>
                       <p>Plotted Development</p>
                     </div>
                     <div className="box">
-                      <h4>Status</h4>
+                      <h3>Status</h3>
                       <p>Newly Launched</p>
                     </div>
                   </div>
@@ -159,13 +165,13 @@ const OurModal = ({ handleModal }) => {
 
                 <hr className="divider" />
                 <div className="amnities-container">
-                  <h3 className="desktop">30+ Amenities</h3>
+                  <button onClick={()=>setShow(!show)} className="desktop">30+ Amenities</button>
 
                   <div className="card-container">
-                    {data.map((item, index) => (
+                    {itemsToShow.map((item, index) => (
                       <div className="card" key={index}>
-                        <img src={LIBRARY_LOGO} alt="" width={36} height={36} />
-                        {item}
+                        <img src={item.image} alt="" width={36} height={36} />
+                        {item.text}
                       </div>
                     ))}
                   </div>
